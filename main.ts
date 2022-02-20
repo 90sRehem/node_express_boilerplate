@@ -1,4 +1,4 @@
-import { app } from './app';
+import { app } from '@shared/infra/http/app';
 
 const PORT = process.env.PORT || 3333;
 

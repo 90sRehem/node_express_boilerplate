@@ -16,11 +16,11 @@
     "noEmit": false,
     "allowJs": true,
     "lib": [
-      "ES2015"
+      "ES6"
     ],
     "paths": {
-      "@modules/*": [
-        "modules/*"
+      "@domain/*": [
+        "domain/*"
       ],
       "@config/*": [
         "config/*"
@@ -40,6 +40,7 @@
   },
   "include": [
     "src/**/*",
+    "main.ts",
   ],
   "exclude": [
     "node_modules",

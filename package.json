@@ -1,18 +1,17 @@
 {
-  "name": "node_express_boilerplate",
+  "name": "node-express-template",
   "version": "1.0.0",
-  "description": "",
+  "author": "Jonathan Rehem",
+  "license": "MIT",
+  "description": "nodejs template with Typescript, DDD and express server.",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "start": "node dist/main.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn main.ts",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
     "build": "rimraf ./dist && swc src --out-dir dist",
     "lint": "eslint src/** spec/** --fix --cache"
   },
-  "keywords": [],
-  "author": "jonathan rehem",
-  "license": "ISC",
   "devDependencies": {
     "@swc/cli": "^0.1.55",
     "@swc/core": "^1.2.142",

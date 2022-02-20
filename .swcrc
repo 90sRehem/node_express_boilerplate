@@ -12,6 +12,15 @@
     },
     "baseUrl": "./src",
     "paths": {
+      "@domain/*": [
+        "domain/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
       "@utils/*": [
         "utils/*"
       ]
