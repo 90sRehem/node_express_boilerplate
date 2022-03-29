@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "module": "commonjs",
     "target": "es2017",
     "sourceMap": true,
@@ -8,28 +7,19 @@
     "removeComments": true,
     "noImplicitAny": false,
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": ".",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "noEmit": false,
     "allowJs": true,
     "lib": [
       "ES6"
     ],
     "paths": {
-      "@domain/*": [
-        "domain/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@shared/*": [
-        "shared/*"
-      ],
-      "@utils/*": [
-        "utils/*"
+      "@/*": [
+        "./src/*"
       ]
     },
     "esModuleInterop": true,
@@ -40,7 +30,6 @@
   },
   "include": [
     "src/**/*",
-    "main.ts",
   ],
   "exclude": [
     "node_modules",

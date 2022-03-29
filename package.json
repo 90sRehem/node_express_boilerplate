@@ -6,8 +6,8 @@
   "description": "nodejs template with Typescript, DDD and express server.",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/main.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn main.ts",
+    "start": "node dist/shared/infra/http/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.js",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
     "build": "rimraf ./dist && swc src --out-dir dist",
     "lint": "eslint src/** spec/** --fix --cache"
