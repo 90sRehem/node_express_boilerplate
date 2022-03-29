@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 
 import { AppError } from '@utils/AppError';
@@ -16,20 +16,22 @@ app.get('/', (_, response) => {
   response.send('Server Ok!');
 });
 
-app.use((err: Error, _request: Request, response: Response) => {
-  if (err instanceof AppError) {
+app.use(
+  (err: Error, _request: Request, response: Response, _next: NextFunction) => {
+    if (err instanceof AppError) {
+      console.error(err);
+
+      return response.status(err.statusCode).json({
+        status: 'error',
+        message: err.message,
+      });
+    }
+
     console.error(err);
 
-    return response.status(err.statusCode).json({
+    return response.status(500).json({
       status: 'error',
-      message: err.message,
+      message: `Internal server error - ${err.message}`,
     });
-  }
-
-  console.error(err);
-
-  return response.status(500).json({
-    status: 'error',
-    message: `Internal server error - ${err.message}`,
-  });
-});
+  },
+);
