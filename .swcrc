@@ -3,26 +3,19 @@
     "externalHelpers": false,
     "parser": {
       "syntax": "typescript",
-      "tsx": true,
-      "decorators": true
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": false
     },
     "transform": {
       "legacyDecorator": true,
       "decoratorMetadata": true
     },
-    "baseUrl": "./src",
+    "target": "es2017",
+    "baseUrl": ".",
     "paths": {
-      "@domain/*": [
-        "domain/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@shared/*": [
-        "shared/*"
-      ],
-      "@utils/*": [
-        "utils/*"
+      "@/*": [
+        "./src/*"
       ]
     }
   },
