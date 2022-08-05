@@ -4,10 +4,10 @@
   "author": "Jonathan Rehem",
   "license": "MIT",
   "description": "nodejs template with Typescript, DDD and express server.",
-  "main": "dist/server.js",
+  "main": "dist/src/api/server.js",
   "scripts": {
-    "start": "node dist/shared/infra/http/server.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.js",
+    "start": "node dist/src/api/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/api/server.ts",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
     "build": "rimraf ./dist && swc src --out-dir dist",
     "lint": "eslint src/** spec/** --fix --cache"
@@ -42,7 +42,10 @@
     "eslint-plugin-import-helpers": "^1.2.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "nanoid": "^3.1.30"
+    "nanoid": "^3.1.30",
+    "reflect-metadata": "^0.1.13",
+    "shallow-equal-object": "^1.1.1",
+    "tsyringe": "^4.7.0"
   },
   "husky": {
     "hooks": {
