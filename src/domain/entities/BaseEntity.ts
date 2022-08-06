@@ -4,7 +4,7 @@ import { UniqueId } from "./UniqueId";
 
 export abstract class BaseEntity<T> extends Notifiable {
   protected readonly _id: UniqueId;
-  public readonly _props: T;
+  protected readonly _props: T;
 
   constructor(props: T, id?: UniqueId) {
     super();

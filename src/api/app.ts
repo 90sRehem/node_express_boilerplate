@@ -4,7 +4,7 @@ import cors from "cors";
 import express from "express";
 
 import "@/shared/container";
-import { AppError } from "@/utils/AppError";
+import { AppError } from "@/shared/errors/AppError";
 
 export class App {
   private readonly _app: express.Application;

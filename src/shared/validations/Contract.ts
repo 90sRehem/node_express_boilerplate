@@ -81,24 +81,24 @@ export class Contract {
 
   public HasMaxLength(
     value: any,
-    min: number,
+    max: number,
     property: string,
     message: string,
   ): Contract {
     if (value) {
-      if (value.length > min) this.Result(property, message);
+      if (value.length > max) this.Result(property, message);
     }
     return this;
   }
 
   public HasMinLength(
     value: any,
-    max: number,
+    min: number,
     property: string,
     message: string,
   ): Contract {
     if (value) {
-      if (value.length < max) this.Result(property, message);
+      if (value.length < min) this.Result(property, message);
     }
     return this;
   }

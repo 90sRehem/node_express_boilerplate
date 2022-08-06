@@ -18,13 +18,18 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3333",
-    "url": "http://localhost:3333",
-    "method": "GET",
+    "url": "http://localhost:3333/users/",
+    "method": "POST",
     "sortNum": 0,
     "created": "2022-08-04T23:02:47.937Z",
-    "modified": "2022-08-05T00:06:22.845Z",
+    "modified": "2022-08-06T03:11:44.069Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"jonathan@com.com\",\n  \"firstName\": \"teste\",\n  \"lastName\": \"\",\n  \"password\": \"teste123\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]
