@@ -1,6 +1,5 @@
-import { CommandResult } from "@/domain/commands/CommandResult";
-
-import { BaseController } from "./BaseController";
+import { CommandResult } from "@/shared/commands";
+import { BaseController } from "@/shared/infra";
 
 export class HealthCheckController extends BaseController {
   constructor() {

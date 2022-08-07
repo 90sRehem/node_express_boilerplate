@@ -1,7 +1,8 @@
 import { Router } from "express";
 
+import { userRoutes } from "@/modules/users";
+
 import { healthcheckRoutes } from "./healthcheck.routes";
-import { userRoutes } from "./user.routes";
 
 export const routes = Router();
 

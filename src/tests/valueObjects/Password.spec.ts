@@ -1,11 +1,11 @@
-import { Password } from "@/domain/valueObjects";
+import { Password } from "@/modules/users/valueObjects";
 
 let invalidPassword: Password;
 let validPassword: Password;
 
 describe("Email test", () => {
   beforeAll(() => {
-    invalidPassword = new Password({ value: null });
+    invalidPassword = new Password({ value: "" });
     validPassword = new Password({ value: "123456" });
   });
   it("Should return error if password is empty.", () => {
