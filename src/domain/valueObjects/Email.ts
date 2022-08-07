@@ -11,7 +11,6 @@ export class Email extends ValueObject<IEmailProps> {
     super(props);
     this.AddNotification(
       new Contract()
-        .IsRequired()
         .IsNotNullOrEmptyString(
           this.props.address,
           "Email.Address",

@@ -10,9 +10,7 @@ export class Avatar extends ValueObject<IAvatarProps> {
   constructor(props: IAvatarProps) {
     super(props);
     this.AddNotification(
-      new Contract()
-        .IsRequired()
-        .IsUrl(this.props.url, "Avatar.Url", "Url inválida."),
+      new Contract().IsUrl(this.props.url, "Avatar.Url", "Url inválida."),
     );
   }
 

@@ -12,14 +12,13 @@ export class Name extends ValueObject<INameProps> {
     super(props);
     this.AddNotification(
       new Contract()
-        .IsRequired()
         .IsNotNullOrEmptyString(
-          this.firstName,
+          this.props.firstName,
           "Name.FirstName",
           "O nome é obrigatório!",
         )
         .HasMinLength(
-          this.firstName,
+          this.props.firstName,
           3,
           "Name.FirstName",
           "Nome deve conter no mínimo 3 carecteres!",

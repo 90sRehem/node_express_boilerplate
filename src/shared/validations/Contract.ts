@@ -9,12 +9,8 @@ export class Contract {
     return this._notifications;
   }
 
-  public IsRequired() {
-    return this;
-  }
-
   public IsNotNull(value: any, property: string, message: string): Contract {
-    if (value === null) {
+    if (value === null || undefined) {
       this.Result(property, message);
     }
     return this;
@@ -25,7 +21,7 @@ export class Contract {
     property: string,
     message: string,
   ): Contract {
-    if (value === "") this.Result(property, message);
+    if (value === "" || undefined) this.Result(property, message);
     return this;
   }
 
@@ -34,7 +30,8 @@ export class Contract {
     property: string,
     message: string,
   ): Contract {
-    if (value === "" || value === null) this.Result(property, message);
+    if (value === "" || value === null || value === undefined)
+      this.Result(property, message);
     return this;
   }
 

@@ -1,10 +1,12 @@
-import "express-async-errors";
 import "reflect-metadata";
+import "express-async-errors";
 import cors from "cors";
 import express from "express";
 
 import "@/shared/container";
 import { AppError } from "@/shared/errors/AppError";
+
+import { routes } from "./routes";
 
 export class App {
   private readonly _app: express.Application;
@@ -23,6 +25,7 @@ export class App {
     this._app.use(cors({ origin: "*" }));
     this._app.use(express.json());
     this._app.use(this.errorMiddleware);
+    this._app.use(routes);
   }
 
   public listen(port: number): void {

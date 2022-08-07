@@ -15,7 +15,6 @@ export class User extends BaseEntity<IUserProps> {
     this.AddNotifications(this._props.email.GetNotifications);
     this.AddNotifications(this._props.name.GetNotifications);
     this.AddNotifications(this._props.password.GetNotifications);
-    // this.AddNotifications(this.avatar.GetNotifications);
   }
 
   public get id(): string {
@@ -37,11 +36,11 @@ export class User extends BaseEntity<IUserProps> {
     return this._props.avatar || null;
   }
 
-  public get toObj() {
+  public parse() {
     return {
       id: this.id,
-      name: this.name,
-      email: this.email,
+      name: this._props.name.fullName,
+      email: this._props.email.address,
     };
   }
 }

@@ -1,26 +1,32 @@
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
-import { CreateUserCommand, GenericCommandResult } from "@/domain/commands";
+import { CreateUserCommand } from "@/domain/commands";
 import { ICreateUserDTO } from "@/domain/dtos";
-import { User } from "@/domain/entities";
 import { CreateUserHandler } from "@/domain/handlers/CreateUserHandler";
-import { Email, Name, Password } from "@/domain/valueObjects";
 import { ECommands, EHandlers } from "@/shared/enums";
 
 import { BaseController } from "./BaseController";
 
+@injectable()
 export class UserController extends BaseController {
   constructor(
     @inject(EHandlers.CreateUserHandler)
-    private readonly _handler: CreateUserHandler, // @inject(ECommands.CreateUserCommand) // private readonly _command: CreateUserCommand,
+    private readonly handler: CreateUserHandler,
+    @inject(ECommands.CreateUserCommand)
+    private readonly command: CreateUserCommand,
   ) {
     super();
   }
+
   async executeImpl(): Promise<any> {
-    const { email, firstName, lastName, password } = this.request
-      .body as ICreateUserDTO;
-    const command = new CreateUserCommand(email, firstName, lastName, password);
-    const teste = await this._handler.handle(command);
-    return this.ok(teste);
+    const dto = this.request.body as ICreateUserDTO;
+    const command = this.command.resolve(dto);
+    const createdUser = await this.handler.handle(command);
+
+    if (createdUser.success) {
+      return this.response(201, createdUser);
+    }
+
+    return this.response(400, createdUser);
   }
 }

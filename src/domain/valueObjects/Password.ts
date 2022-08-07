@@ -14,7 +14,6 @@ export class Password extends ValueObject<IPasswordProps> {
     super(props);
     this.AddNotification(
       new Contract()
-        .IsRequired()
         .IsNotNullOrEmptyString(
           this.props.value,
           "Password.Value",

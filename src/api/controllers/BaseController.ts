@@ -1,13 +1,17 @@
 import * as express from "express";
 
 export abstract class BaseController {
-  protected request: express.Request;
-  protected response: express.Response;
+  protected _request: express.Request;
+  protected _response: express.Response;
   protected abstract executeImpl(): Promise<void | any>;
 
+  public get request(): express.Request {
+    return this._request;
+  }
+
   public execute(request: express.Request, response: express.Response): void {
-    this.request = request;
-    this.response = response;
+    this._request = request;
+    this._response = response;
 
     this.executeImpl();
   }
@@ -22,19 +26,27 @@ export abstract class BaseController {
 
   public ok<T>(dto?: T): express.Response {
     if (dto) {
-      return this.response.status(200).json(dto);
+      return this._response.status(200).json(dto);
     }
 
-    return this.response.sendStatus(200);
+    return this._response.sendStatus(200);
+  }
+
+  public response<T>(statusCode: number, dto?: T): express.Response {
+    if (dto) {
+      return this._response.status(statusCode).json(dto);
+    }
+
+    return this._response.sendStatus(statusCode);
   }
 
   public created(): express.Response {
-    return this.response.sendStatus(201);
+    return this._response.sendStatus(201);
   }
 
   public clientError(message?: string): express.Response {
     return BaseController.jsonResponse(
-      this.response,
+      this._response,
       400,
       message || "Unauthorized",
     );
@@ -42,7 +54,7 @@ export abstract class BaseController {
 
   public unauthorized(message?: string): express.Response {
     return BaseController.jsonResponse(
-      this.response,
+      this._response,
       401,
       message || "Unauthorized",
     );
@@ -50,7 +62,7 @@ export abstract class BaseController {
 
   public forbidden(message?: string): express.Response {
     return BaseController.jsonResponse(
-      this.response,
+      this._response,
       403,
       message || "Forbidden",
     );
@@ -58,7 +70,7 @@ export abstract class BaseController {
 
   public notFound(message?: string): express.Response {
     return BaseController.jsonResponse(
-      this.response,
+      this._response,
       404,
       message || "Not found",
     );
@@ -66,7 +78,7 @@ export abstract class BaseController {
 
   public conflict(message?: string): express.Response {
     return BaseController.jsonResponse(
-      this.response,
+      this._response,
       409,
       message || "Conflict",
     );
@@ -74,7 +86,7 @@ export abstract class BaseController {
 
   public tooMany(message?: string): express.Response {
     return BaseController.jsonResponse(
-      this.response,
+      this._response,
       429,
       message || "Too many requests",
     );
@@ -83,7 +95,7 @@ export abstract class BaseController {
   public fail(error: Error | string): express.Response {
     console.log(error);
 
-    return this.response.status(500).json({
+    return this._response.status(500).json({
       message: error.toString(),
     });
   }

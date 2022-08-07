@@ -1,4 +1,4 @@
-import { GenericCommandResult } from "@/domain/commands/GenericCommandResult";
+import { CommandResult } from "@/domain/commands/CommandResult";
 
 import { BaseController } from "./BaseController";
 
@@ -7,6 +7,6 @@ export class HealthCheckController extends BaseController {
     super();
   }
   async executeImpl(): Promise<any> {
-    return this.ok(new GenericCommandResult(true, "Server ok.", null));
+    return this.ok(new CommandResult(true, "Server ok.", null));
   }
 }

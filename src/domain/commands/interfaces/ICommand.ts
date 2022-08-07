@@ -1,3 +1,4 @@
-export interface ICommand {
+export interface ICommand<T> {
   validate(): void;
+  resolve(props: T): any;
 }

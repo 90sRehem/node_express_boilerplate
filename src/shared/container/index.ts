@@ -14,7 +14,10 @@ container.registerSingleton<HealthCheckController>(
   HealthCheckController,
 );
 
-container.registerSingleton<UserController>("UserController", UserController);
+container.registerSingleton<UserController>(
+  EControllers.UserController,
+  UserController,
+);
 
 container.registerSingleton<IUserRepository>(
   ERepositories.UserRepository,

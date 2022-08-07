@@ -10,9 +10,9 @@ import { UserController } from "../controllers/UserController";
 
 export const userRoutes = Router();
 
-// const userRepository = new UserRepository();
 // const createUserHandler = new CreateUserHandler(userRepository);
-// const userController = new UserController(createUserHandler);
+// const userController = new UserController();
+
 const userController = container.resolve<UserController>(
   EControllers.UserController,
 );
