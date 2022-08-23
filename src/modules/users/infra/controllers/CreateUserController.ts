@@ -6,16 +6,13 @@ import {
 import { BaseController } from "@/shared/infra";
 
 export class CreateUserController extends BaseController {
-  constructor(
-    private readonly handler: CreateUserHandler,
-    private readonly command: CreateUserCommand,
-  ) {
+  constructor(private readonly handler: CreateUserHandler) {
     super();
   }
 
   async executeImpl(): Promise<any> {
     const dto = this.request.body as ICreateUserDTO;
-    const command = this.command.resolve(dto);
+    const command = new CreateUserCommand(dto);
     const createdUser = await this.handler.handle(command);
 
     if (createdUser.success) {

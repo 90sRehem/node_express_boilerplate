@@ -13,15 +13,12 @@ export class CreateUserCommand
   public lastName: string;
   public password: string;
 
-  constructor() {
+  constructor({ email, firstName, lastName, password }: ICreateUserDTO) {
     super();
-  }
-  resolve({ email, firstName, lastName, password }: ICreateUserDTO) {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
     this.password = password;
-    return this;
   }
 
   validate(): void {
@@ -37,15 +34,9 @@ export class CreateUserCommand
           3,
           "firstName",
           "O nome deve conter pelo menos 3 caracteres.",
-        ),
-    );
-    this.AddNotification(
-      new Contract()
+        )
         .IsNotNullOrEmptyString(this.email, "email", "E-mail obrigatório!")
-        .IsEmail(this.email, "email", "E-mail inválido!"),
-    );
-    this.AddNotification(
-      new Contract()
+        .IsEmail(this.email, "email", "E-mail inválido!")
         .IsNotNullOrEmptyString(
           this.password,
           "password",
