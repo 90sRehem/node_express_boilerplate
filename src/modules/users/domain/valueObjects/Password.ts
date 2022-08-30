@@ -47,11 +47,11 @@ export class Password extends ValueObject<IPasswordProps> {
     return this.props.value === plainTextPassword;
   }
 
-  public async getHashedValue(): Promise<string> {
+  public getHashedValue(): string {
     if (this.isAlreadyHashed()) {
       return this.props.value;
     }
 
-    return bcrypt.hash(this.props.value, 8);
+    return bcrypt.hashSync(this.props.value, 8);
   }
 }

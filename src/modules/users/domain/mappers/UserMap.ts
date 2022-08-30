@@ -1,12 +1,12 @@
 import { User } from "../entities";
 
 export class UserMap {
-  public static async toPersistance(user: User): Promise<any> {
+  public static toPersistance(user: User): any {
     return {
       id: user.id.toString(),
-      name: user.name,
+      name: user.name.fullName,
       email: user.email.address,
-      password: await user.password.getHashedValue(),
+      password: user.password.getHashedValue(),
     };
   }
 }

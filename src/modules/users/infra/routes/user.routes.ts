@@ -1,7 +1,13 @@
 import { Router } from "express";
 
-import { createUserController } from "../factories";
+import { ensureAuthenticated } from "@/api/middlewares/ensureAuthenticated";
 
-export const userRoutes = Router();
+import { createUserController } from "../factories";
+import { listUsersController } from "../factories/ListUsersFactory";
+
+export const userRoutes: Router = Router();
 
 userRoutes.post("/", (req, res) => createUserController.execute(req, res));
+userRoutes.get("/", ensureAuthenticated, (req, res) =>
+  listUsersController.execute(req, res),
+);
