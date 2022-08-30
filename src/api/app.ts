@@ -1,6 +1,7 @@
 import "express-async-errors";
 import cors from "cors";
 import express from "express";
+import "dotenv/config";
 
 import { AppError } from "@/shared/errors/AppError";
 
@@ -20,10 +21,11 @@ export class App {
   }
 
   private bootstrap(): void {
-    this._app.use(cors({ origin: "*" }));
+    this._app.use(cors({ origin: "http://localhost:3000" }));
+    this._app.disable("x-powered-by");
     this._app.use(express.json());
     this._app.use(this.errorMiddleware);
-    this._app.use(routes);
+    this._app.use("/api/v1", routes);
   }
 
   public listen(port: number): void {
