@@ -1,8 +1,7 @@
-import { UserRepository } from "@/infra/repositories/UserRepository";
-
 import { CreateUserHandler } from "../../domain";
 import { CreateUserController } from "../controllers";
+import { UserRepository } from "../repositories";
 
-const userRepository = new UserRepository();
+export const userRepository = new UserRepository();
 const createUserHandler = new CreateUserHandler(userRepository);
 export const createUserController = new CreateUserController(createUserHandler);

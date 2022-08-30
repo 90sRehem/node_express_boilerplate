@@ -30,7 +30,7 @@ export class CreateUserHandler
     if (userAlreadyExists) {
       return new CommandResult(
         false,
-        "Este e-mail já está associado a um usuário!",
+        "Este e-mail já está associado à um usuário!",
         userAlreadyExists.email.address,
       );
     }
