@@ -4,7 +4,7 @@ import { CreateSessionHandler } from "../../domain";
 import { CreateSessionController } from "../controllers";
 import { AuthRepository } from "../repositories";
 
-const authRepository = new AuthRepository();
+export const authRepository = new AuthRepository();
 const createSessionHandler = new CreateSessionHandler(
   userRepository,
   authRepository,

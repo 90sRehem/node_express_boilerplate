@@ -1,6 +1,6 @@
 import { IUserRepository } from "@/modules/users";
 import { CommandResult, ICommandResult } from "@/shared/commands";
-import { IHandler } from "@/shared/handlers";
+import { ICommandHandler } from "@/shared/handlers";
 import { Notifiable } from "@/shared/notifications";
 
 import { IAuthRepository } from "../../infra/repositories/IAuthRepository";
@@ -8,7 +8,7 @@ import { CreateSessionCommand } from "../commands/CreateSessionCommand";
 
 export class CreateSessionHandler
   extends Notifiable
-  implements IHandler<CreateSessionCommand>
+  implements ICommandHandler<CreateSessionCommand, unknown>
 {
   constructor(
     private readonly _userRepository: IUserRepository,
@@ -16,8 +16,11 @@ export class CreateSessionHandler
   ) {
     super();
   }
-  async handle(command: CreateSessionCommand): Promise<ICommandResult> {
+  async handle(
+    command: CreateSessionCommand,
+  ): Promise<ICommandResult<unknown>> {
     command.validate();
+    let result: Record<string, unknown> = {};
 
     if (command.Invalid) {
       return new CommandResult(
@@ -30,19 +33,20 @@ export class CreateSessionHandler
     const userExists = await this._userRepository.findByEmail(command.email);
 
     if (userExists) {
-      const user = {
+      const { token } = this._authRepository.createToken(
+        {},
+        userExists.id.toString(),
+      );
+      const { refreshToken } = this._authRepository.createRefreshToken();
+      result = {
         id: userExists.id.toString(),
         name: userExists.name.fullName,
         email: userExists.email.address,
-      };
-      const { token } = this._authRepository.createToken({}, user.id);
-      const { refreshToken } = this._authRepository.createRefreshToken();
-
-      return new CommandResult(true, "Usuário autenticado.", {
-        ...user,
         token,
         refreshToken,
-      });
+      };
+
+      return new CommandResult(true, "Usuário autenticado.", result);
     }
 
     return new CommandResult(

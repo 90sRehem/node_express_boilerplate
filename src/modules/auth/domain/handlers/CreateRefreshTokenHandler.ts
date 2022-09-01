@@ -1,6 +1,6 @@
 import { IUserRepository } from "@/modules/users";
 import { CommandResult, ICommandResult } from "@/shared/commands";
-import { IHandler } from "@/shared/handlers";
+import { ICommandHandler } from "@/shared/handlers";
 import { Notifiable } from "@/shared/notifications";
 
 import { IAuthRepository } from "../../infra";
@@ -8,18 +8,17 @@ import { CreateRefreshTokenCommand } from "../commands/CreateRefreshTokenCommand
 
 export class CreateRefreshTokenHandler
   extends Notifiable
-  implements IHandler<CreateRefreshTokenCommand>
+  implements ICommandHandler<CreateRefreshTokenCommand, unknown>
 {
-  /**
-   *
-   */
   constructor(
     private readonly authRepository: IAuthRepository,
     private readonly userRepository: IUserRepository,
   ) {
     super();
   }
-  async handle(command: CreateRefreshTokenCommand): Promise<ICommandResult> {
+  async handle(
+    command: CreateRefreshTokenCommand,
+  ): Promise<ICommandResult<unknown>> {
     command.validate();
     let result: Record<string, unknown> = {};
 

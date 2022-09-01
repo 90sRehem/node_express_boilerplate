@@ -1,5 +1,5 @@
 import { ICommandResult, CommandResult } from "@/shared/commands";
-import { IHandler } from "@/shared/handlers";
+import { ICommandHandler } from "@/shared/handlers/ICommandHandler";
 import { Notifiable } from "@/shared/notifications";
 
 import { IUserRepository } from "../../infra";
@@ -9,12 +9,12 @@ import { Email, Name, Password } from "../valueObjects";
 
 export class CreateUserHandler
   extends Notifiable
-  implements IHandler<CreateUserCommand>
+  implements ICommandHandler<CreateUserCommand, unknown>
 {
   constructor(private readonly _repository: IUserRepository) {
     super();
   }
-  async handle(command: CreateUserCommand): Promise<ICommandResult> {
+  async handle(command: CreateUserCommand): Promise<ICommandResult<unknown>> {
     command.validate();
 
     if (command.Invalid) {
