@@ -1,6 +1,6 @@
-import { UserQueries } from "../../domain";
+import { ListUsersHandler } from "../../domain/handlers/ListUsersHandler";
 import { ListUsersController } from "../controllers/ListUsersControllers";
 import { userRepository } from "./CreateUserFactory";
 
-const userQueries = new UserQueries(userRepository);
-export const listUsersController = new ListUsersController(userQueries);
+const listUsersHandler = new ListUsersHandler(userRepository);
+export const listUsersController = new ListUsersController(listUsersHandler);

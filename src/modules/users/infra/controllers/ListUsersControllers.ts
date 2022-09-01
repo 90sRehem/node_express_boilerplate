@@ -1,19 +1,18 @@
 import { BaseController } from "@/shared/infra";
 
-import { UserQueries } from "../../domain";
+import { ListUsersHandler } from "../../domain/handlers/ListUsersHandler";
+import { ListUsersQuery } from "../../domain/queries/ListUsersQuery";
 
 export class ListUsersController extends BaseController {
-  /**
-   *
-   */
-  constructor(private readonly userQueries: UserQueries) {
+  constructor(private readonly listUsersHandler: ListUsersHandler) {
     super();
   }
   protected async executeImpl(): Promise<any> {
-    const users = await this.userQueries.list();
+    const query = new ListUsersQuery(this.request.user);
+    const users = await this.listUsersHandler.handle(query);
 
-    if (users.length) return this.response(200, users);
+    if (!users.data.length) return this.response(404, users);
 
-    return this.notFound("Nenhum usuário encontrado.");
+    return this.response(200, users);
   }
 }
