@@ -1,5 +1,5 @@
-export interface ICommandResult {
+export interface ICommandResult<T> {
   success: boolean;
   message: string;
-  data: any;
+  data: T;
 }
