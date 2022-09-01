@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { AuthRepository } from "@/modules/auth";
+import { authRepository } from "@/modules/auth";
 
 export function ensureAuthenticated(
   req: Request,
@@ -8,21 +8,28 @@ export function ensureAuthenticated(
   next: NextFunction,
 ) {
   const authToken = req.headers.authorization;
-  const authRepository = new AuthRepository();
 
   if (authToken) {
     const [, token] = authToken.split(" ");
 
     try {
       const verifyToken = authRepository.verify(token);
-      req.user = verifyToken.sub as string;
-      return next();
-    } catch (err) {
-      console.log(`auth-error: ${err.message}`);
 
-      return res.status(401).send();
+      if (verifyToken.sub) {
+        req.user = verifyToken.sub as string;
+        return next();
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        // console.log(`auth-error: ${err.message}`);
+        if (err.message === "invalid token") {
+          return res.status(401).json({ error: "token-invalid" });
+        }
+      }
+
+      return res.status(401).json({ error: "token-expired" });
     }
   }
 
-  return res.status(401).send();
+  return res.status(401).json({ error: "token-invalid" });
 }
