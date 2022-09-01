@@ -1,8 +1,8 @@
 import * as express from "express";
 
 export abstract class BaseController {
-  protected _request: express.Request;
-  protected _response: express.Response;
+  private _request: express.Request;
+  private _response: express.Response;
   protected abstract executeImpl(): Promise<void | any>;
 
   public get request(): express.Request {
@@ -98,5 +98,9 @@ export abstract class BaseController {
     return this._response.status(500).json({
       message: error.toString(),
     });
+  }
+
+  public setCookie(name: string, val: any, options: express.CookieOptions) {
+    return this._response.cookie(name, val, options);
   }
 }
