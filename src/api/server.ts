@@ -4,4 +4,4 @@ import { App } from "./app";
 
 const app = new App();
 
-app.listen(Number(APP_PORT));
+app.listen(Number(APP_PORT) || 3333);

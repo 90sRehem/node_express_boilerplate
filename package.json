@@ -46,8 +46,11 @@
     "eslint-plugin-import-helpers": "^1.2.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.3",
     "jsonwebtoken": "^8.5.1",
     "nanoid": "^3.1.30",
+    "reflect-metadata": "^0.1.13",
     "shallow-equal-object": "^1.1.1"
   },
   "husky": {
