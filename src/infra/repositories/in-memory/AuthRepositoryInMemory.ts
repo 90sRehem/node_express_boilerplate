@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import jwt, { JwtPayload, Jwt } from "jsonwebtoken";
 
-import { authConfig } from "@/config";
+import { authConfig } from "@/config/auth";
 import { IAuthRepository } from "@/domain/repositories";
 
 @injectable()

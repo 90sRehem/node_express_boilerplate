@@ -1,4 +1,4 @@
-import { Password } from "@/modules/users/valueObjects";
+import { Password } from "@/domain/valueObjects";
 
 let invalidPassword: Password;
 let validPassword: Password;

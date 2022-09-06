@@ -1,4 +1,4 @@
-import { APP_PORT } from "@/config";
+import { APP_PORT } from "@/config/constants";
 
 import { App } from "./app";
 

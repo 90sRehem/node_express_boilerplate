@@ -4,7 +4,7 @@ type PersistanceUser = {
   id?: string;
   name: string;
   email: string;
-  password: string;
+  password?: string;
 };
 
 export class UserMap {
@@ -24,7 +24,7 @@ export class UserMap {
       {
         email: new Email({ address: raw.email }),
         name: new Name({ firstName, lastName }),
-        password: new Password({ value: raw.password }),
+        password: new Password({ value: raw.password as string }),
       },
       new UniqueId(raw.id),
     );

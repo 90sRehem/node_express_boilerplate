@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 
-import { REPOSITORIES } from "@/config";
+import { REPOSITORIES } from "@/config/constants";
 import { Notifiable } from "@/shared/notifications";
 
 import {

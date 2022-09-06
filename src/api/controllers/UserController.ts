@@ -5,7 +5,7 @@ import {
   controller,
 } from "inversify-express-utils";
 
-import { MIDDLEWARES } from "@/config";
+import { MIDDLEWARES } from "@/config/constants";
 import { CommandResult } from "@/domain/commands";
 import { UserQueries } from "@/domain/queries";
 
@@ -17,8 +17,6 @@ export class UsersController extends BaseHttpController {
 
   @httpGet("/")
   public async listAllUsers(): Promise<IHttpActionResult> {
-    console.log(this.httpContext.user.details);
-
     const users = await this.userQueries.list(
       this.httpContext.user.details,
       Number(this.httpContext.request.query.page),

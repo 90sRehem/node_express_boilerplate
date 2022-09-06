@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { injectable, inject } from "inversify";
 import { interfaces } from "inversify-express-utils";
 
-import { REPOSITORIES } from "@/config";
+import { REPOSITORIES } from "@/config/constants";
 import { Principal } from "@/domain/entities";
 import { IAuthRepository } from "@/domain/repositories";
 

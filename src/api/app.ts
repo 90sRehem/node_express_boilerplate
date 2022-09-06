@@ -6,7 +6,7 @@ import "dotenv/config";
 import { Container } from "inversify";
 import { InversifyExpressServer } from "inversify-express-utils";
 
-import { MIDDLEWARES, REPOSITORIES } from "@/config";
+import { MIDDLEWARES, REPOSITORIES } from "@/config/constants";
 import { AppError } from "@/domain/errors";
 import { SessionHandler } from "@/domain/handlers";
 import { UserQueries } from "@/domain/queries";

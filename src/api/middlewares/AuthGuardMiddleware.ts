@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { inject, injectable } from "inversify";
 import { BaseMiddleware } from "inversify-express-utils";
 
-import { REPOSITORIES } from "@/config";
+import { REPOSITORIES } from "@/config/constants";
 import { IAuthRepository } from "@/domain";
 
 @injectable()
