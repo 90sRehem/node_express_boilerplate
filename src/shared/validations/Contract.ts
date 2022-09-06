@@ -2,8 +2,6 @@ import { Notification } from "../notifications";
 
 export class Contract {
   private _notifications: Array<Notification> = new Array<Notification>();
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() { }
 
   public get GetNotifications(): Array<Notification> {
     return this._notifications;

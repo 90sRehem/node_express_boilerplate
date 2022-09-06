@@ -1,4 +1,4 @@
-import { Email } from "@/modules/users/valueObjects";
+import { Email } from "@/domain/valueObjects";
 
 let invalidEmail: Email;
 let validEmail: Email;

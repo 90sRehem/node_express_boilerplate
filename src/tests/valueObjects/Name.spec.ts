@@ -1,4 +1,4 @@
-import { Name } from "@/modules/users/valueObjects";
+import { Name } from "@/domain/valueObjects";
 
 let invalidName: Name;
 let validName: Name;

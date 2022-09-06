@@ -1,4 +1,5 @@
-import { Email, Name, Password, User } from "@/modules/users";
+import { Email, Name, Password } from "@/domain";
+import { User } from "@/domain/entities";
 
 describe("User tests", () => {
   it("should return success when creating user", () => {

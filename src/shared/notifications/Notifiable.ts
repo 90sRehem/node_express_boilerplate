@@ -3,9 +3,11 @@ import { INotifiable } from "./INotifiable";
 import { Notification } from "./Notification";
 
 export abstract class Notifiable implements INotifiable {
-  private _notifications: Array<Notification> = new Array<Notification>();
+  private _notifications: Array<Notification>;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() { }
+  constructor() {
+    this._notifications = new Array<Notification>();
+  }
 
   public get Messages(): Array<string> {
     return this._notifications.map(x => x.message);
@@ -36,12 +38,10 @@ export abstract class Notifiable implements INotifiable {
   ): void {
     if (property instanceof Notification) {
       this._notifications.unshift(property);
-      return;
     }
     if (property instanceof Contract) {
       const nots = property.GetNotifications;
       this._notifications.unshift(...nots);
-      return;
     }
     // eslint-disable-next-line eqeqeq
     if (typeof property == "string") {

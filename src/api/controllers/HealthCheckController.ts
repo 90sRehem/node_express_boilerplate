@@ -1,11 +1,23 @@
-import { CommandResult } from "@/shared/commands";
-import { BaseController } from "@/shared/infra";
+import {
+  httpGet,
+  BaseHttpController,
+  Controller,
+  IHttpActionResult,
+  controller,
+} from "inversify-express-utils";
 
-export class HealthCheckController extends BaseController {
+import { CommandResult } from "@/domain/commands";
+
+@controller("/")
+export class HealthCheckController
+  extends BaseHttpController
+  implements Controller {
   constructor() {
     super();
   }
-  async executeImpl(): Promise<any> {
+
+  @httpGet("/")
+  public index(): IHttpActionResult {
     return this.ok(new CommandResult(true, "Server ok.", null));
   }
 }
