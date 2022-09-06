@@ -1,5 +1,6 @@
-import { Contract } from "@/shared/validations/Contract";
-import { ValueObject } from "@/shared/valueObjects";
+import { Contract } from "@/shared/validations";
+
+import { ValueObject } from "./ValueObject";
 
 interface IEmailProps {
   address: string;

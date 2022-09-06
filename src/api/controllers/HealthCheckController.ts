@@ -6,7 +6,7 @@ import {
   controller,
 } from "inversify-express-utils";
 
-import { CommandResult } from "@/shared/commands";
+import { CommandResult } from "@/domain/commands";
 
 @controller("/")
 export class HealthCheckController

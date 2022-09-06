@@ -8,7 +8,7 @@ interface IValueObjectProps {
 
 export abstract class ValueObject<
   T extends IValueObjectProps,
-  > extends Notifiable {
+> extends Notifiable {
   public readonly props: T;
 
   constructor(props: T) {
