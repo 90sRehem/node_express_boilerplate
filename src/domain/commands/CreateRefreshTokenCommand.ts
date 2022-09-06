@@ -1,6 +1,7 @@
-import { ICommand } from "@/shared/commands";
 import { Notifiable } from "@/shared/notifications";
-import { Contract } from "@/shared/validations/Contract";
+import { Contract } from "@/shared/validations";
+
+import { ICommand } from "./ICommand";
 
 export class CreateRefreshTokenCommand
   extends Notifiable
