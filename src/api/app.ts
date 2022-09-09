@@ -61,7 +61,10 @@ export class App {
   private createServer(): void {
     this._app.setConfig(app => {
       app.use(
-        cors({ origin: ["http://localhost:3000", "http://localhost:3001"] }),
+        cors({
+          origin: ["http://localhost:3000", "http://localhost:3001"],
+          exposedHeaders: "X-Total-Count",
+        }),
       );
       app.disable("x-powered-by");
       app.use(express.json());

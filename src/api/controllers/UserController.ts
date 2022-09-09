@@ -22,7 +22,7 @@ export class UsersController extends BaseHttpController {
       Number(this.httpContext.request.query.page),
       Number(this.httpContext.request.query.limit),
     );
-    this.httpContext.response.setHeader("x-total-count", users.totalCount);
+    this.httpContext.response.setHeader("X-Total-Count", users.totalCount);
     return this.ok(new CommandResult(true, "Sucesso.", users.data));
   }
 }
