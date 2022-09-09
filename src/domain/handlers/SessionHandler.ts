@@ -77,7 +77,39 @@ export class SessionHandler
       );
     }
 
-    if (command.Invalid) {
+    if (command instanceof CreateRefreshTokenCommand) {
+      if (command.Invalid) {
+        return new CommandResult(
+          false,
+          "Ops, parece que tem algo de errado.",
+          command.GetNotifications,
+        );
+      }
+
+      try {
+        this._authRepository.verify(command.refreshToken);
+        const userExists = await this._userRepository.findById(command.userId);
+
+        if (userExists) {
+          const { refreshToken } = this._authRepository.createRefreshToken();
+          const { token } = this._authRepository.createToken(
+            {},
+            userExists.id.toString(),
+          );
+
+          result = {
+            id: userExists.id.toString(),
+            name: userExists.name.fullName,
+            email: userExists.email.address,
+            token,
+            refreshToken,
+          };
+          return new CommandResult(true, "Sucesso.", result);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
       return new CommandResult(
         false,
         "Ops, parece que tem algo de errado.",
@@ -85,34 +117,10 @@ export class SessionHandler
       );
     }
 
-    try {
-      this._authRepository.verify(command.refreshToken);
-      const userExists = await this._userRepository.findById(command.userId);
-
-      if (userExists) {
-        const { refreshToken } = this._authRepository.createRefreshToken();
-        const { token } = this._authRepository.createToken(
-          {},
-          userExists.id.toString(),
-        );
-
-        result = {
-          id: userExists.id.toString(),
-          name: userExists.name.fullName,
-          email: userExists.email.address,
-          token,
-          refreshToken,
-        };
-        return new CommandResult(true, "Sucesso.", result);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
     return new CommandResult(
       false,
-      "Ops, parece que tem algo de errado.",
-      command.GetNotifications,
+      "Ops, parece que aconteceu algo de errado!",
+      null,
     );
   }
 }
