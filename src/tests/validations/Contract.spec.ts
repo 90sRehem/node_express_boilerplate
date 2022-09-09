@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeAll } from "vitest";
+
 describe("Contract tests", () => {
   beforeAll(() => {
     // TODO

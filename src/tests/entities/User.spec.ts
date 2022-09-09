@@ -1,24 +1,44 @@
-import { Email, Name, Password } from "@/domain";
+import { describe, it, expect, beforeAll } from "vitest";
+
 import { User } from "@/domain/entities";
+import { Email, Name, Password } from "@/domain/valueObjects";
+
+let validUser: User;
+let invalidUser: User;
+let invalidEmail: Email;
+let validEmail: Email;
+let invalidPassword: Password;
+let validPassword: Password;
+let invalidName: Name;
+let validName: Name;
 
 describe("User tests", () => {
-  it("should return success when creating user", () => {
-    const user = new User({
-      email: new Email({ address: "johndoe@email.com" }),
-      name: new Name({ firstName: "john", lastName: "doe" }),
-      password: new Password({ value: "123456" }),
+  beforeAll(() => {
+    invalidName = new Name({ firstName: "", lastName: "" });
+    validName = new Name({ firstName: "John", lastName: "Doe" });
+    invalidPassword = new Password({ value: "" });
+    validPassword = new Password({ value: "123456" });
+    invalidEmail = new Email({ address: "" });
+    validEmail = new Email({ address: "johndoe@email.com" });
+    validUser = new User({
+      name: validName,
+      password: validPassword,
+      email: validEmail,
+      createdAt: "",
     });
 
-    expect(user.Valid).toBe(true);
+    invalidUser = new User({
+      name: invalidName,
+      password: invalidPassword,
+      email: invalidEmail,
+      createdAt: "",
+    });
   });
 
+  it("should return success when creating user", () => {
+    expect(validUser.Valid).toBe(true);
+  });
   it("should return failure when creating user", () => {
-    const user = new User({
-      email: new Email({ address: "" }),
-      name: new Name({ firstName: "", lastName: "" }),
-      password: new Password({ value: "" }),
-    });
-
-    expect(user.Invalid).toBe(true);
+    expect(invalidUser.Invalid).toBe(true);
   });
 });

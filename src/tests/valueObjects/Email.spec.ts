@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeAll } from "vitest";
+
 import { Email } from "@/domain/valueObjects";
 
 let invalidEmail: Email;
