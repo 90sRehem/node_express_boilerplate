@@ -19,6 +19,7 @@ export class UserRepositoryInMemory implements IUserRepository {
       name: "jonathan rehem",
       email: "jonathan.rehem@gmail.com",
       password: "123456",
+      createdAt: new Date().toLocaleDateString("pt-BR"),
     });
     this.users.push(user);
 
@@ -28,6 +29,7 @@ export class UserRepositoryInMemory implements IUserRepository {
         name: `jonathan${index} rehem`,
         email: `jonathan.rehem${index}@gmail.com`,
         password: "123456",
+        createdAt: new Date().toLocaleDateString("pt-BR"),
       });
       this.users.push(standardUser);
     });

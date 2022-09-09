@@ -5,6 +5,7 @@ type PersistanceUser = {
   name: string;
   email: string;
   password?: string;
+  createdAt: string;
 };
 
 export class UserMap {
@@ -14,6 +15,7 @@ export class UserMap {
       name: user.name.fullName,
       email: user.email.address,
       password: user.password.getHashedValue(),
+      createdAt: user.createdAt,
     };
   }
 
@@ -25,6 +27,7 @@ export class UserMap {
         email: new Email({ address: raw.email }),
         name: new Name({ firstName, lastName }),
         password: new Password({ value: raw.password as string }),
+        createdAt: raw.createdAt,
       },
       new UniqueId(raw.id),
     );

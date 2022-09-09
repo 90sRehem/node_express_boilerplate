@@ -6,6 +6,7 @@ interface IUserProps {
   email: Email;
   password: Password;
   avatar?: Avatar;
+  createdAt: string;
 }
 
 export class User extends BaseEntity<IUserProps> {
@@ -30,5 +31,9 @@ export class User extends BaseEntity<IUserProps> {
 
   public get avatar(): Avatar | null {
     return this._props.avatar || null;
+  }
+
+  public get createdAt(): string {
+    return this._props.createdAt;
   }
 }
